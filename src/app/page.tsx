@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 const HomePage = () => {
-  return <h1>Hello World!</h1>;
+  redirect("/register");
 };
 
 export default HomePage;
