@@ -82,7 +82,7 @@ export const RegisterForm = () => {
             type="submit"
             className="bg-brand-primary hover:bg-brand-primary/80 w-full gap-1"
           >
-            {!isFormSubmitting && <Spinner className="size-3.5" />}
+            {isFormSubmitting && <Spinner className="size-3.5" />}
             Criar conta
           </Button>
         </form>
