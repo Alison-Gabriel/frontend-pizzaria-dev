@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
 
 import { register } from "@/actions/auth";
 
@@ -19,10 +20,21 @@ import { Label } from "../ui/label";
 import { Spinner } from "../ui/spinner";
 
 export const RegisterForm = () => {
+  const router = useRouter();
+
   const [formState, registerAction, isFormSubmitting] = useActionState(
     register,
     null,
   );
+
+  useEffect(() => {
+    const isSuccessfullyFormState = formState?.success;
+    const hasRedirectToOnFormState = formState?.redirectTo;
+
+    if (isSuccessfullyFormState && hasRedirectToOnFormState) {
+      router.replace(String(formState.redirectTo));
+    }
+  }, [formState, router]);
 
   return (
     <Card className="bg-app-card border-app-border">
